@@ -17,21 +17,25 @@ class Hand:
         self.value = 0
         self.aces = 0
 
+
+
     def add_card(self, card):
         self.cards.append(card)
         self.value += values[card.rank]
 
+        # track aces
+        if card.rank == 'Ace':
+            self.aces += 1
+
     def addjust_for_ace(self):
-        pass
+        # If total value > 21 and I still have an Ace
+        # Than Change THe ace to be a 1
+        while self.value > 21 and self.aces:
+            self.value -= 10
+            self.aces -= 1
 
 
-test_deck = deck()
-test_deck.shuffle()
-test_player = Hand()
-pulled_card = test_deck.deal()
-print(pulled_card)
-test_player.add_card(pulled_card)
-print(test_player.value)
+
 
 
 
